@@ -13,7 +13,7 @@ class TestDaemon(TestCase):
     def setUp(self):
         self.rpc = TestRPCProvider()
         self.daemon = DaemonFactory()
-        self.bot = EventListener(self.rpc)
+        self.bot = EventListener(provider=self.rpc)
         self.bot.decoder.methods = {}
         self.maxDiff = None
 
