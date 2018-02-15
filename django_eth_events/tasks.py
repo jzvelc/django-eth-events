@@ -35,8 +35,7 @@ def event_listener():
             daemon.listener_lock = True
             daemon.save()
     if locked:
-        logger.debug(
-            'LOCK already being imported by another worker')
+        logger.debug('LOCK already being imported by another worker')
     else:
         bot = EventListener()
         try:

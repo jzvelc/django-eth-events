@@ -29,22 +29,22 @@ class TestDaemon(TestCase):
         self.bot.web3.eth.getTransactionReceipt(tx_hash)
         tx_hash2 = factory.deploy()
         self.bot.web3.eth.getTransactionReceipt(tx_hash2)
-        self.assertEquals(list(self.bot.get_last_mined_blocks()), [1])
+        self.assertEqual(list(self.bot.get_last_mined_blocks()), [1])
         self.bot.update_block_number(1)
-        self.assertEquals(list(self.bot.get_last_mined_blocks()), [])
+        self.assertEqual(list(self.bot.get_last_mined_blocks()), [])
 
     def test_load_abis(self):
         self.assertIsNotNone(self.bot.decoder)
-        self.assertEquals(len(self.bot.decoder.methods), 0)
-        self.assertEquals(self.bot.decoder.add_abi([]), 0)
-        self.assertEquals(len(self.bot.decoder.methods), 0)
+        self.assertEqual(len(self.bot.decoder.methods), 0)
+        self.assertEqual(self.bot.decoder.add_abi([]), 0)
+        self.assertEqual(len(self.bot.decoder.methods), 0)
         # No ABIs
-        self.assertEquals(self.bot.decoder.add_abi(abi), 6)
-        self.assertEquals(len(self.bot.decoder.methods), 6)
-        self.assertEquals(self.bot.decoder.add_abi([{'nothing': 'wrong'}]), 0)
+        self.assertEqual(self.bot.decoder.add_abi(abi), 6)
+        self.assertEqual(len(self.bot.decoder.methods), 6)
+        self.assertEqual(self.bot.decoder.add_abi([{'nothing': 'wrong'}]), 0)
 
-        self.assertEquals(self.bot.decoder.add_abi(abi), 6)
-        self.assertEquals(self.bot.decoder.add_abi([{'nothing': 'wrong'}]), 0)
+        self.assertEqual(self.bot.decoder.add_abi(abi), 6)
+        self.assertEqual(self.bot.decoder.add_abi([{'nothing': 'wrong'}]), 0)
 
     def test_get_logs(self):
         # no logs before transactions

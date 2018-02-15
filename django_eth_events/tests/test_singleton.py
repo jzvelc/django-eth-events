@@ -11,7 +11,7 @@ class TestSingleton(TestCase):
     def test_single_istance(self):
         service1 = Web3Service()
         service2 = Web3Service()
-        self.assertEquals(service1.web3, service2.web3)
+        self.assertEqual(service1.web3, service2.web3)
 
     def test_arg_rpc_provider(self):
         rpc_provider = RPCProvider(
@@ -22,7 +22,7 @@ class TestSingleton(TestCase):
 
         service1 = Web3Service()
         service2 = Web3Service(rpc_provider)
-        self.assertEquals(service1.web3, service2.web3)
+        self.assertEqual(service1.web3, service2.web3)
 
     def test_arg_ipc_provider(self):
         ipc_provider = IPCProvider(
@@ -31,10 +31,10 @@ class TestSingleton(TestCase):
         )
 
         service1 = Web3Service()
-        self.assertIsInstance(service1.web3.currentProvider, RPCProvider)
+        self.assertIsInstance(service1.web3.providers[0], RPCProvider)
         service2 = Web3Service(ipc_provider)
-        self.assertIsInstance(service2.web3.currentProvider, IPCProvider)
-        self.assertEquals(service2.web3.currentProvider, ipc_provider)
+        self.assertIsInstance(service2.web3.providers[0], IPCProvider)
+        self.assertEqual(service2.web3.providers[0], ipc_provider)
 
     def test_event_listener_singleton(self):
         ipc_provider = IPCProvider(
@@ -44,6 +44,6 @@ class TestSingleton(TestCase):
 
         listener1 = EventListener()
         listener2 = EventListener()
-        self.assertEquals(listener1, listener2)
+        self.assertEqual(listener1, listener2)
         listener3 = EventListener(provider=ipc_provider)
-        self.assertNotEquals(listener2, listener3)
+        self.assertNotEqual(listener2, listener3)

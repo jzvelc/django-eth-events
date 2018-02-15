@@ -25,15 +25,15 @@ class TestDecoder(TestCase):
 
     def test_add_abis(self):
         self.decoder.add_abi([])
-        self.assertEquals(len(self.decoder.methods), 0)
+        self.assertEqual(len(self.decoder.methods), 0)
         self.decoder.add_abi(self.test_abi)
-        self.assertEquals(len(self.decoder.methods), 5)
+        self.assertEqual(len(self.decoder.methods), 5)
         self.decoder.remove_abi([])
-        self.assertEquals(len(self.decoder.methods), 5)
+        self.assertEqual(len(self.decoder.methods), 5)
         self.decoder.remove_abi(loads('[{"inputs": [{"type": "address", "name": ""}], "constant": true, "name": "isInstantiation", "payable": false, "outputs": [{"type": "bool", "name": ""}], "type": "function"}]'))
-        self.assertEquals(len(self.decoder.methods), 4)
+        self.assertEqual(len(self.decoder.methods), 4)
         self.decoder.remove_abi(self.test_abi)
-        self.assertEquals(len(self.decoder.methods), 0)
+        self.assertEqual(len(self.decoder.methods), 0)
 
     def test_decode_logs(self):
         logs = [

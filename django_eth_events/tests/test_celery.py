@@ -45,13 +45,13 @@ class TestCelery(TestCase):
         deadlock_checker(2000) # 2 seconds
         daemon_test = Daemon.get_solo()
         # Test deadlock detection
-        self.assertEquals(daemon_test.listener_lock, False)
+        self.assertEqual(daemon_test.listener_lock, False)
 
         daemon.listener_lock = True
         daemon.save()
         deadlock_checker()
         daemon_test = Daemon.get_solo()
-        self.assertEquals(daemon_test.listener_lock, True)
+        self.assertEqual(daemon_test.listener_lock, True)
 
     def test_event_listener(self):
         daemon_factory = DaemonFactory(listener_lock=False)
@@ -82,6 +82,6 @@ class TestCelery(TestCase):
         event_listener()
         # Do checks
         daemon = Daemon.get_solo()
-        self.assertEquals(daemon.block_number, daemon_factory.block_number+1)
-        self.assertEquals(Block.objects.all().count(), n_blocks+1)
+        self.assertEqual(daemon.block_number, daemon_factory.block_number+1)
+        self.assertEqual(Block.objects.all().count(), n_blocks+1)
         self.assertFalse(daemon.listener_lock)
